@@ -83,16 +83,6 @@ The next table correspond tot he WELFake database which is just a 2-label classi
 | **Running Time**  |                 13.58 mins       |           78.77  mins   |
 
 
-The next plot represents the confusion matrix for the logistic regression in the WELFake dataset
-
-<img src="imgs/CM-LR.jpg" alt="Confusion Matrix – LR" style="width:30%;">
-
-The next plot represents the confusion matrix for the LSTM model in the WELFake dataset
-
-<img src="imgs/CM-LSTM.jpg" alt="Confusion Matrix – LSTM" style="width:30%;">
-
-
-
 # Conclucions
 For the [Politifact](https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data) dataset, we obtained comparable values of accuracy, recall, precision, and ROC–AUC for both models — logistic regression and LSTM.  
 
