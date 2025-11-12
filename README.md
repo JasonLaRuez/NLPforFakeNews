@@ -36,7 +36,22 @@ The LSTM model is a deep learning architecture designed to capture long-range de
 It processes each article as an ordered sequence of tokens, allowing the model to learn patterns in language structure and meaning that simpler linear models cannot capture.
 
 # Results 
-We summarize our results in the following table:
+We summarize our results in the following tables:
+
+| **Metric**                  | **LR (TF-IDF)** | **LSTM-forward** | **LSTM-backward** | **LSTM-combined |
+|----------------------------:|:---------------:|:----------------:|:-----------------:|:---------------:|
+| **Accuracy (6-class)**      | 0.302           | 0.292            | 0.292             | 0.300           |
+| **Running Time (6-class)**  | 87.83s          | 190.43s          | 254.07s           | 444.5s          |
+| **Accuracy (3-class)**      | 0.555           | 0.518            | 0.524             | 0.548           |
+| **Running Time (3-class)**  | 76.08s          | 183.86s          | 252.68s           | 436.54s         |
+
+| **Metric**        | **LR (TF-IDF)** | **LSTM-forward** | **LSTM-backward** | **LSTM-combined** |
+|------------------:|:---------------:|:----------------:|:-----------------:|:-----------------:|
+| **Accuracy**      | 0.705           | 0.702            | 0.688             | 0.706             |
+| **Precision**     | 0.705           | 0.702            |   | | 0.705 | |
+| **Recall**        | 0.709           |                  |   | | 0.709 | |
+| **ROC AUC**       | 0.769           |                  |    | | 0.769 | |
+| **Running Time**  | 10.81s          | 181.1s          | 249.78s | 430.88s | 10.81s | |
 
 | **Metric**       | **Logistic Regression (TF-IDF)** | **LSTM (Deep Learning)** |
 |------------------:|:--------------------------------:|:------------------------:|
@@ -45,8 +60,6 @@ We summarize our results in the following table:
 | **Recall**        |                                  |                          |
 | **ROC AUC**       |                                  |                          |
 | **Running Time**  |                                  |                          |
-
-
 
 
 
