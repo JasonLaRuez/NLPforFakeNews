@@ -81,7 +81,7 @@ The next table correspond tot he WELFake database which is just a 2-label classi
 | **Precision**     |                 0.970            |           0.992          |
 | **Recall**        |                 0.970            |           0.993          |
 | **ROC AUC**       |                 0.996            |           0.998          |
-| **Running Time**  |                 13.58 mins       |           78.767  mins   |
+| **Running Time**  |                 13.58 mins       |           78.77  mins   |
 
 
 The next plot represents the confusion matrix for the logistic regression in the WELFake dataset
