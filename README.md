@@ -99,6 +99,12 @@ In contrast, for the [WELFake](https://www.kaggle.com/datasets/saurabhshahane/fa
 
 We therefore expect that for even larger datasets, the LSTM model will continue to outperform logistic regression. This suggests that training LSTM-based models can provide a stronger defense against misinformation, making them particularly valuable for organizations focused on detecting fake news.
 
+# Overview of Repository Layout
+
+The Politifact.ipynb notebook contains the code used to analyze the Politifact dataset and to build both the TF IDF model and the AWD LSTM classifier. The WELFake.ipynb notebook performs a similar analysis for the WELFake dataset. The EDA.ipynb notebook provides exploratory data analysis for both datasets, including statistics such as the most common words per label, typical article lengths, frequent bigrams and trigrams, and for the Politifact dataset, additional features like the most common news sources and quoted speakers. The imgs folder stores the figures of the confusion matrices, and the processed_datasets folder contains the cleaned datasets produced by the PreProcessingDataset module, which is used to preprocess the WELFake data.
+
+
+
 
 # Team Members
 This project was developed for 2025 Fall Erdös Institute Deep Learning Boot Camp by:
