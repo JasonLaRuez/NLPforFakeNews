@@ -85,11 +85,11 @@ The next table correspond tot he WELFake database which is just a 2-label classi
 
 The next plot represents the confusion matrix for the logistic regression in the WELFake dataset
 
-<img src="imgs/CM-LR.jpg" alt="Confusion Matrix – LR" style="width:60%;">
+<img src="imgs/CM-LR.jpg" alt="Confusion Matrix – LR" style="width:30%;">
 
 The next plot represents the confusion matrix for the LSTM model in the WELFake dataset
 
-<img src="imgs/CM-LSTM.jpg" alt="Confusion Matrix – LSTM" style="width:60%;">
+<img src="imgs/CM-LSTM.jpg" alt="Confusion Matrix – LSTM" style="width:30%;">
 
 
 
