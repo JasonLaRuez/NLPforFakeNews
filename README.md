@@ -84,6 +84,26 @@ The next table correspond tot he WELFake database which is just a 2-label classi
 | **Running Time**  |                 13.58 mins       |           78.767  mins   |
 
 
+The next plot represents the confusion matrix for the logistic regression in the WELFake dataset
 
+![Confusion Matrix – LSTM](imgs/CM-LR.jpg)
+
+The next plot represents the confusion matrix for the LSTM model in the WELFake dataset
+
+![Confusion Matrix – LSTM](imgs/CM-LSTM.jpg)
+
+
+# Conclucions
+For the [Politifact](https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data) dataset, we obtained comparable values of accuracy, recall, precision, and ROC–AUC for both models — logistic regression and LSTM.  
+
+In contrast, for the [WELFake](https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data) dataset, the LSTM model achieved slightly higher accuracy, recall, precision, and ROC–AUC than the logistic regression model. Overall, the WELFake dataset yields better performance metrics, likely due to its larger number of samples and longer text content.  
+
+We therefore expect that for even larger datasets, the LSTM model will continue to outperform logistic regression. This suggests that training LSTM-based models can provide a stronger defense against misinformation, making them particularly valuable for organizations focused on detecting fake news.
+
+
+# Team Members
+This project was developed for 2025 Fall Erdös Institute Deep Learning Boot Camp by:
+
+-Victoria Knapp Perez -Jason LaRuez
 
 
