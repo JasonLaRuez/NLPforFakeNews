@@ -34,10 +34,9 @@ where $n_d$ is the total number of documents in the corpus, and $df(t)$ is the d
 
 $$tfidf(t,d) = tf(t,d)\cdot (1+idf(t))$$
 
-## DeepLearning Model
+## DeepLearning Model: AWD-LSTM
 
-The LSTM model is a deep learning architecture designed to capture long-range dependencies and contextual relationships within sequences of words.
-It processes each article as an ordered sequence of tokens, allowing the model to learn patterns in language structure and meaning that simpler linear models cannot capture.
+The LSTM model is a deep learning architecture designed to capture long-range dependencies and contextual relationships within sequences of words.It processes each article as an ordered sequence of tokens, allowing the model to learn patterns in language structure and meaning that simpler linear models cannot capture. AWD-LSTM (ASGD Weight-Dropped LSTM) is a regularized variant of the Long Short-Term Memory network designed for efficient language modeling. It introduces weight-dropping (dropout on hidden-to-hidden weights), variational dropout, and NT-ASGD (averaged SGD) optimization to improve generalization. This architecture achieves strong performance on text tasks by combining stability, regularization, and efficient training dynamics
 
 # Results 
 We summarize our results in the following tables. These first set of tables correspond to the Politifact database.
