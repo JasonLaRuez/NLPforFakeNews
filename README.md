@@ -1,6 +1,6 @@
 # NLP for Fake News Detection.
 
-We employ a Long Short-Term Memory (LSTM) network trained on a [dataset](https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data) containing both fake and true news articles to classify whether a given news item is genuine or fabricated.
+We employ a Long Short-Term Memory (LSTM) network trained on two datasets, the [Politifact](https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data) fact-check dataset and the [WELFake](https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data) fake news dataset. The Politifact dataset contains texts from news articles, social media, speeches, etc. which have been labelled as varying degrees of true or false: pants-fire, false, mostly-false, half-true, mostly-true and true. The WELFake dataset is a larger corpus of text containing both fake and true news articles to classify whether a given news item is genuine or fabricated.
  
 ## Problem Statement
 
@@ -23,12 +23,16 @@ This project is highly relevant for companies that may face legal exposure for d
 
 ## DataBase
 
-We use the Kaggle database from [https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data](https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data)
+We use the Kaggle databases from [https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data]( https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data) and [https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data](https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data)
 
-## Baseline model
+## Baseline model: Multi-class Logistic Regression
 
-The baseline model uses logistic regression trained on Term Frequency–Inverse Document Frequency (TF-IDF) representations of the news text, which quantify how important each word is within an article relative to the entire dataset.
-This approach provides a classical linear model that captures correlations between word occurrence patterns and news authenticity.
+The baseline model uses logistic regression trained on Term Frequency–Inverse Document Frequency (TF-IDF) representations of the news text, which quantify how important each word is within an article relative to the entire dataset. We do not include sentiment-based features in this model, since ["A benchmark study of machine learning models for online fake news detection"](https://www.sciencedirect.com/science/article/pii/S266682702100013X) found that sentiment-based features are not useful in fake news detection. This approach provides a classical linear model that captures correlations between word occurrence patterns and news authenticity.
+
+To compute TF-IDF, we first compute the term-frequency $tf(t,d)$, which is the number of times term $t$ occurs in document $d$. Next, we compute the inverse-document-frequency $$idf(t)=\log{\frac{1+n_d}{1+df(t)}}$$
+where $n_d$ is the total number of documents in the corpus, and $df(t)$ is the document frequency of the term $t$ (the number of documents that contain the term $t$). If a word occurs in every document, then the $idf$ of that word is 0. Thus, words that occur in most documents (such as "the", "as", "it") are given very little weight. Finally, the term frequency-inverse document frequency (TF-IDF) is given by:
+
+$$tfidf(t,d) = tf(t,d)\cdot (1+idf(t))$$
 
 ## DeepLearning Model
 
@@ -38,20 +42,35 @@ It processes each article as an ordered sequence of tokens, allowing the model t
 # Results 
 We summarize our results in the following tables:
 
-| **Metric**                  | **LR (TF-IDF)** | **LSTM-forward** | **LSTM-backward** | **LSTM-combined |
-|----------------------------:|:---------------:|:----------------:|:-----------------:|:---------------:|
-| **Accuracy (6-class)**      | 0.302           | 0.292            | 0.292             | 0.300           |
-| **Running Time (6-class)**  | 87.83s          | 190.43s          | 254.07s           | 444.5s          |
-| **Accuracy (3-class)**      | 0.555           | 0.518            | 0.524             | 0.548           |
-| **Running Time (3-class)**  | 76.08s          | 183.86s          | 252.68s           | 436.54s         |
+6-class
+
+| **Metric**        | **LR (TF-IDF)** | **LSTM-forward** | **LSTM-backward** | **LSTM-combined** |
+|------------------:|:---------------:|:----------------:|:-----------------:|:-----------------:|
+| **Accuracy**      | 0.302           | 0.292            | 0.292             | 0.300             |
+| **Precision**     | 0.295           | 0.297            | 0.295             | 0.303             |
+| **Recall**        | 0.289           | 0.302            | 0.292             | 0.305             |
+| **ROC AUC**       | 0.667           | 0.682            | 0.676             | 0.692             |
+| **Running Time**  | 110.65s         | 179.44s          | 244.17s           | 423.61s            |
+
+3-class
+
+| **Metric**        | **LR (TF-IDF)** | **LSTM-forward** | **LSTM-backward** | **LSTM-combined** |
+|------------------:|:---------------:|:----------------:|:-----------------:|:-----------------:|
+| **Accuracy**      | 0.555           | 0.518            | 0.524             | 0.548             |
+| **Precision**     | 0.556           | 0.538            | 0.538             | 0.562             |
+| **Recall**        | 0.558           | 0.522            | 0.535             | 0.555             |
+| **ROC AUC**       | 0.726           | 0.713            | 0.714             | 0.724             |
+| **Running Time**  | 23.05s          | 174.18s          | 251.51s           | 425.69s           |
+
+2-class
 
 | **Metric**        | **LR (TF-IDF)** | **LSTM-forward** | **LSTM-backward** | **LSTM-combined** |
 |------------------:|:---------------:|:----------------:|:-----------------:|:-----------------:|
 | **Accuracy**      | 0.705           | 0.702            | 0.688             | 0.706             |
-| **Precision**     | 0.705           | 0.702            |   | | 0.705 | |
-| **Recall**        | 0.709           |                  |   | | 0.709 | |
-| **ROC AUC**       | 0.769           |                  |    | | 0.769 | |
-| **Running Time**  | 10.81s          | 181.1s          | 249.78s | 430.88s | 10.81s | |
+| **Precision**     | 0.697           | 0.648            | 0.612             | 0.636             |
+| **Recall**        | 0.753           | 0.778            | 0.779             | 0.793             |
+| **ROC AUC**       | 0.769           | 0.774            | 0.765             | 0.778             |
+| **Running Time**  | 11.76s          | 171.10s          | 250.27s           | 421.37s           |
 
 | **Metric**       | **Logistic Regression (TF-IDF)** | **LSTM (Deep Learning)** |
 |------------------:|:--------------------------------:|:------------------------:|
