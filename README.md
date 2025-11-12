@@ -40,9 +40,9 @@ The LSTM model is a deep learning architecture designed to capture long-range de
 It processes each article as an ordered sequence of tokens, allowing the model to learn patterns in language structure and meaning that simpler linear models cannot capture.
 
 # Results 
-We summarize our results in the following tables:
+We summarize our results in the following tables. These first set of tables correspond to the Politifact database.
 
-6-class
+6-class (Politifact)
 
 | **Metric**        | **LR (TF-IDF)** | **LSTM-forward** | **LSTM-backward** | **LSTM-combined** |
 |------------------:|:---------------:|:----------------:|:-----------------:|:-----------------:|
@@ -52,7 +52,7 @@ We summarize our results in the following tables:
 | **ROC AUC**       | 0.667           | 0.682            | 0.676             | 0.692             |
 | **Running Time**  | 110.65s         | 179.44s          | 244.17s           | 423.61s            |
 
-3-class
+3-class (Politifact)
 
 | **Metric**        | **LR (TF-IDF)** | **LSTM-forward** | **LSTM-backward** | **LSTM-combined** |
 |------------------:|:---------------:|:----------------:|:-----------------:|:-----------------:|
@@ -62,7 +62,7 @@ We summarize our results in the following tables:
 | **ROC AUC**       | 0.726           | 0.713            | 0.714             | 0.724             |
 | **Running Time**  | 23.05s          | 174.18s          | 251.51s           | 425.69s           |
 
-2-class
+2-class (Politifact)
 
 | **Metric**        | **LR (TF-IDF)** | **LSTM-forward** | **LSTM-backward** | **LSTM-combined** |
 |------------------:|:---------------:|:----------------:|:-----------------:|:-----------------:|
@@ -72,13 +72,16 @@ We summarize our results in the following tables:
 | **ROC AUC**       | 0.769           | 0.774            | 0.765             | 0.778             |
 | **Running Time**  | 11.76s          | 171.10s          | 250.27s           | 421.37s           |
 
+
+The next table correspond tot he WELFake database which is just a 2-label classification problem.
+
 | **Metric**       | **Logistic Regression (TF-IDF)** | **LSTM (Deep Learning)** |
 |------------------:|:--------------------------------:|:------------------------:|
-| **Accuracy**      |                                  |              0.99           |
-| **Precision**     |                                  |                          |
-| **Recall**        |                                  |                          |
-| **ROC AUC**       |                                  |                          |
-| **Running Time**  |                                  |                          |
+| **Accuracy**      |                 0.972            |           0.994          |
+| **Precision**     |                 0.970            |           0.992          |
+| **Recall**        |                 0.970            |           0.993          |
+| **ROC AUC**       |                 0.996            |           0.998          |
+| **Running Time**  |                                  |           78.767  mins   |
 
 
 
