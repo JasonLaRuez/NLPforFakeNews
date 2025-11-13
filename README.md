@@ -39,7 +39,14 @@ $$tfidf(t,d) = tf(t,d)\cdot (1+idf(t))$$
 The LSTM model is a deep learning architecture designed to capture long-range dependencies and contextual relationships within sequences of words.It processes each article as an ordered sequence of tokens, allowing the model to learn patterns in language structure and meaning that simpler linear models cannot capture. AWD-LSTM (ASGD Weight-Dropped LSTM) is a regularized variant of the Long Short-Term Memory network designed for efficient language modeling. It introduces weight-dropping (dropout on hidden-to-hidden weights), variational dropout, and NT-ASGD (averaged SGD) optimization to improve generalization. This architecture achieves strong performance on text tasks by combining stability, regularization, and efficient training dynamics
 
 # Results 
-We summarize our results in the following tables. These first set of tables correspond to the Politifact database.
+We summarize our results in the following tables. The first set of tables corresponds to the Politifact dataset, which contains six truth labels: *true*, *mostly true*, *half true*, *mostly false*, *false*, and *pants on fire*. 
+
+We train our classifier under three labeling schemes:
+
+1. **Six labels** – using the original classes.  
+2. **Three labels** – *pants on fire* and *false* are grouped as *false*; *half true* and *mostly false* are grouped as *mixed*; and *true* and *mostly true* are grouped as *true*.  
+3. **Two labels** – *mostly false*, *false*, and *pants on fire* are grouped as *false*; and *true*, *mostly true*, and *half true* are grouped as *true*.
+
 
 6-class (Politifact)
 
