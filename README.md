@@ -72,7 +72,7 @@ We summarize our results in the following tables. These first set of tables corr
 | **Running Time**  | 11.76s          | 171.10s          | 250.27s           | 421.37s           |
 
 
-The next table correspond tot he WELFake database which is just a 2-label classification problem.
+The next table corresponds to the WELFake database which is just a 2-label classification problem.
 
 | **Metric**       | **Logistic Regression (TF-IDF)** | **LSTM (Deep Learning)** |
 |------------------:|:--------------------------------:|:------------------------:|
