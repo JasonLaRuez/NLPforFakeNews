@@ -1,6 +1,6 @@
 # NLP for Fake News Detection.
 
-We employ a Long Short-Term Memory (LSTM) network trained on two datasets, the [Politifact](https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data) fact-check dataset and the [WELFake](https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data) fake news dataset. The Politifact dataset contains texts from news articles, social media, speeches, etc. which have been labelled as varying degrees of true or false: pants-fire, false, mostly-false, half-true, mostly-true and true. The WELFake dataset is a larger corpus of text containing both fake and true news articles to classify whether a given news item is genuine or fabricated.
+We employ a Long Short-Term Memory (LSTM) network trained on two datasets, the [Politifact](https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data) fact-check dataset and the [WELFake](https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data) fake news dataset. The Politifact dataset contains texts from news articles, social media, speeches, etc., which have been labelled as varying degrees of true or false: pants-fire, false, mostly-false, half-true, mostly-true, and true. The WELFake dataset is a larger corpus of text containing both fake and true news articles to classify whether a given news item is genuine or fabricated (labelled true or false).
  
 ## Problem Statement
 
@@ -79,7 +79,7 @@ We train our classifier under three labeling schemes:
 | **Running Time**  | 11.76s          | 171.10s          | 250.27s           | 421.37s           |
 
 
-The next table corresponds to the WELFake database which is just a 2-label classification problem.
+The next table corresponds to the WELFake database, which is just a 2-label classification problem.
 
 | **Metric**       | **Logistic Regression (TF-IDF)** | **LSTM (Deep Learning)** |
 |------------------:|:--------------------------------:|:------------------------:|
@@ -90,7 +90,7 @@ The next table corresponds to the WELFake database which is just a 2-label class
 | **Running Time**  |                 13.58 mins       |           78.77  mins   |
 
 
-# Conclucions
+# Conclusions
 For the [Politifact](https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data) dataset, we obtained comparable values of accuracy, recall, precision, and ROC–AUC for both models — logistic regression and LSTM.  
 
 In contrast, for the [WELFake](https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data) dataset, the LSTM model achieved slightly higher accuracy, recall, precision, and ROC–AUC than the logistic regression model. Overall, the WELFake dataset yields better performance metrics, likely due to its larger number of samples and longer text content.  
@@ -107,6 +107,7 @@ The Politifact.ipynb notebook contains the code used to analyze the Politifact d
 # Team Members
 This project was developed for 2025 Fall Erdös Institute Deep Learning Boot Camp by:
 
--Victoria Knapp Perez -Jason LaRuez
+* Victoria Knapp Perez 
+* Jason LaRuez
 
 
