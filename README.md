@@ -25,6 +25,18 @@ This project is highly relevant for companies that may face legal exposure for d
 
 We use the Kaggle database from [https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data]( https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data)
 
+## Data Exploration
+
+The Politifact dataset consists of 21,152 fact-checked statements, spanning 2007 (the year PolitiFact launched) through 2022, with two outlier statements dated 2000 and 2002. Fact-checking volume was low in 2007–2009, increased sharply after PolitiFact won a Pulitzer Prize in 2009, and stayed roughly steady from 2010–2021.
+
+`false` is the most common verdict (5,625 of 21,152 statements). Statements come from thirteen distinct sources, with `news`, `social_media`, and `speech` the most frequent; a disproportionate share of `false`-labeled statements originate from social media.
+
+Statement length (~100 words on average) and stop-word proportion showed little variation across verdicts or sources, ruling both out as useful predictive features on their own. Word- and n-gram-level analysis (167,281 unique bigrams and 221,095 unique trigrams across the corpus) showed the vocabulary is dominated by political figures and topics — "trump," "obama," "percent," "tax," "state" — consistent with the dataset's political fact-checking domain, and motivated using the text content itself (TF-IDF and sequence-based LSTM features) rather than surface statistics like statement length. Full exploratory analysis, including per-verdict word-frequency and n-gram breakdowns, is in `EDA.ipynb`.
+
+## Train/Validation/Test Split and Class Balancing
+
+For each of the three labeling schemes (six-class, three-class, two-class), the data is split 80/10/10 into train/validation/test sets. Because verdict classes are imbalanced (e.g. `false` occurs far more often than `true`), the training set for each scheme is oversampled so every class matches the majority class's count before being combined with the (non-oversampled) validation set for model training.
+
 ## Baseline model: Multi-class Logistic Regression
 
 The baseline model uses logistic regression trained on Term Frequency–Inverse Document Frequency (TF-IDF) representations of the news text, which quantify how important each word is within an article relative to the entire dataset. We do not include sentiment-based features in this model, since ["A benchmark study of machine learning models for online fake news detection"](https://www.sciencedirect.com/science/article/pii/S266682702100013X) found that sentiment-based features are not useful in fake news detection. This approach provides a classical linear model that captures correlations between word occurrence patterns and news authenticity.
@@ -36,7 +48,13 @@ $$tfidf(t,d) = tf(t,d)\cdot (1+idf(t))$$
 
 ## DeepLearning Model: AWD-LSTM
 
-The LSTM model is a deep learning architecture designed to capture long-range dependencies and contextual relationships within sequences of words.It processes each article as an ordered sequence of tokens, allowing the model to learn patterns in language structure and meaning that simpler linear models cannot capture. AWD-LSTM (ASGD Weight-Dropped LSTM) is a regularized variant of the Long Short-Term Memory network designed for efficient language modeling. It introduces weight-dropping (dropout on hidden-to-hidden weights), variational dropout, and NT-ASGD (averaged SGD) optimization to improve generalization. This architecture achieves strong performance on text tasks by combining stability, regularization, and efficient training dynamics
+The LSTM model is a deep learning architecture designed to capture long-range dependencies and contextual relationships within sequences of words.It processes each article as an ordered sequence of tokens, allowing the model to learn patterns in language structure and meaning that simpler linear models cannot capture. AWD-LSTM (ASGD Weight-Dropped LSTM) is a regularized variant of the Long Short-Term Memory network designed for efficient language modeling. It introduces weight-dropping (dropout on hidden-to-hidden weights), variational dropout, and NT-ASGD (averaged SGD) optimization to improve generalization. This architecture achieves strong performance on text tasks by combining stability, regularization, and efficient training dynamics.
+
+For each of the three labeling schemes, we fine-tune a pretrained AWD-LSTM (provided by fastai) in two stages:
+1. **Language-model fine-tuning** – the pretrained language model is further trained on the Politifact statements (next-word prediction) using the train/validation sets *before* oversampling, so it isn't skewed toward duplicated examples.
+2. **Classifier fine-tuning** – the fine-tuned language model becomes the body of a classifier; a new classification head is attached and trained on the oversampled training set.
+
+To improve accuracy, we train three model variants per labeling scheme: a **forward** model (reads the statement in normal order), a **backward** model (reads the statement in reverse order), and a **combined** model that merges the forward and backward models' predictions. This is why each results table below reports the baseline plus all three LSTM variants.
 
 # Results 
 We summarize our results in the following tables. The Politifact dataset contains six truth labels: *true*, *mostly true*, *half true*, *mostly false*, *false*, and *pants on fire*. 
@@ -47,6 +65,7 @@ We train our classifier under three labeling schemes:
 2. **Three labels** – *pants on fire* and *false* are grouped as *false*; *half true* and *mostly false* are grouped as *mixed*; and *true* and *mostly true* are grouped as *true*.  
 3. **Two labels** – *mostly false*, *false*, and *pants on fire* are grouped as *false*; and *true*, *mostly true*, and *half true* are grouped as *true*.
 
+![6-class confusion matrix for the combined LSTM model](imgs/Politifact_6Class_CM-LSTM.png)
 
 6-class (Politifact)
 
