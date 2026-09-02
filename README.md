@@ -29,7 +29,7 @@ We use the Kaggle database from [https://www.kaggle.com/datasets/rmisra/politifa
 
 The Politifact dataset consists of 21,152 fact-checked statements, spanning 2007 (the year PolitiFact launched) through 2022, with two outlier statements dated 2000 and 2002. Fact-checking volume was low in 2007–2009, increased sharply after PolitiFact won a Pulitzer Prize in 2009, and stayed roughly steady from 2010–2021.
 
-`false` is the most common verdict (5,625 of 21,152 statements). Statements come from thirteen distinct sources, with `news`, `social_media`, and `speech` the most frequent; a disproportionate share of `false`-labeled statements originate from social media.
+The Politifact dataset contains six truth labels: *true*, *mostly true*, *half true*, *mostly false*, *false*, and *pants on fire*. `false` is the most common verdict (5,625 of 21,152 statements). Statements come from thirteen distinct sources, with `news`, `social_media`, and `speech` the most frequent; a disproportionate share of `false`-labeled statements originate from social media.
 
 Statement length (~100 words on average) and stop-word proportion showed little variation across verdicts or sources, ruling both out as useful predictive features on their own. Word- and n-gram-level analysis (167,281 unique bigrams and 221,095 unique trigrams across the corpus) showed the vocabulary is dominated by political figures and topics — "trump," "obama," "percent," "tax," "state" — consistent with the dataset's political fact-checking domain, and motivated using the text content itself (TF-IDF and sequence-based LSTM features) rather than surface statistics like statement length. Full exploratory analysis, including per-verdict word-frequency and n-gram breakdowns, is in `EDA.ipynb`.
 
@@ -57,7 +57,7 @@ For each of the three labeling schemes, we fine-tune a pretrained AWD-LSTM (prov
 To improve accuracy, we train three model variants per labeling scheme: a **forward** model (reads the statement in normal order), a **backward** model (reads the statement in reverse order), and a **combined** model that merges the forward and backward models' predictions. This is why each results table below reports the baseline plus all three LSTM variants.
 
 # Results 
-We summarize our results in the following tables. The Politifact dataset contains six truth labels: *true*, *mostly true*, *half true*, *mostly false*, *false*, and *pants on fire*. 
+We summarize our results in the following tables. 
 
 We train our classifier under three labeling schemes:
 
@@ -98,7 +98,7 @@ We train our classifier under three labeling schemes:
 | **Running Time**  | 11.76s          | 171.10s          | 250.27s           | 421.37s           |
 
 # Conclusions
-For the [Politifact](https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data) dataset, we obtained comparable values of accuracy, recall, precision, and ROC–AUC for both models — logistic regression and LSTM.  
+For the [Politifact](https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data) dataset, we obtained comparable values of accuracy, recall, precision, and ROC–AUC for both models — logistic regression and LSTM. While the LSTM models offered modest gains in recall over the logistic regression baseline across most metrics, these gains came at a steep computational cost, with training times up to ~36x longer than the TF-IDF baseline (e.g. 421.37s vs. 11.76s in the 2-class setting).
 
 # Overview of Repository Layout
 
