@@ -1,7 +1,7 @@
 # NLP for Fake News Detection.
 
-We employ a Long Short-Term Memory (LSTM) network trained on two datasets, the [Politifact](https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data) fact-check dataset and the [WELFake](https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data) fake news dataset. The Politifact dataset contains texts from news articles, social media, speeches, etc., which have been labelled as varying degrees of true or false: pants-fire, false, mostly-false, half-true, mostly-true, and true. The WELFake dataset is a larger corpus of text containing both fake and true news articles to classify whether a given news item is genuine or fabricated (labelled true or false).
- 
+We employ a Long Short-Term Memory (LSTM) network trained on the [Politifact](https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data) fact-check dataset. The Politifact dataset contains texts from news articles, social media, speeches, etc., which have been labelled as varying degrees of true or false: pants-fire, false, mostly-false, half-true, mostly-true, and true. 
+
 ## Problem Statement
 
 This project aims to assess how well a deep learning approach based on Long Short-Term Memory (LSTM) networks performs relative to a conventional machine learning model, specifically logistic regression trained on TF-IDF features.
@@ -23,7 +23,7 @@ This project is highly relevant for companies that may face legal exposure for d
 
 ## DataBase
 
-We use the Kaggle databases from [https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data]( https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data) and [https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data](https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data)
+We use the Kaggle database from [https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data]( https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data)
 
 ## Baseline model: Multi-class Logistic Regression
 
@@ -39,7 +39,7 @@ $$tfidf(t,d) = tf(t,d)\cdot (1+idf(t))$$
 The LSTM model is a deep learning architecture designed to capture long-range dependencies and contextual relationships within sequences of words.It processes each article as an ordered sequence of tokens, allowing the model to learn patterns in language structure and meaning that simpler linear models cannot capture. AWD-LSTM (ASGD Weight-Dropped LSTM) is a regularized variant of the Long Short-Term Memory network designed for efficient language modeling. It introduces weight-dropping (dropout on hidden-to-hidden weights), variational dropout, and NT-ASGD (averaged SGD) optimization to improve generalization. This architecture achieves strong performance on text tasks by combining stability, regularization, and efficient training dynamics
 
 # Results 
-We summarize our results in the following tables. The first set of tables corresponds to the Politifact dataset, which contains six truth labels: *true*, *mostly true*, *half true*, *mostly false*, *false*, and *pants on fire*. 
+We summarize our results in the following tables. The Politifact dataset contains six truth labels: *true*, *mostly true*, *half true*, *mostly false*, *false*, and *pants on fire*. 
 
 We train our classifier under three labeling schemes:
 
@@ -78,31 +78,12 @@ We train our classifier under three labeling schemes:
 | **ROC AUC**       | 0.769           | 0.774            | 0.765             | 0.778             |
 | **Running Time**  | 11.76s          | 171.10s          | 250.27s           | 421.37s           |
 
-
-The next table corresponds to the WELFake database, which is just a 2-label classification problem.
-
-| **Metric**       | **Logistic Regression (TF-IDF)** | **LSTM (Deep Learning)** |
-|------------------:|:--------------------------------:|:------------------------:|
-| **Accuracy**      |                 0.972            |           0.994          |
-| **Precision**     |                 0.970            |           0.992          |
-| **Recall**        |                 0.970            |           0.993          |
-| **ROC AUC**       |                 0.996            |           0.998          |
-| **Running Time**  |                 13.58 mins       |           78.77  mins   |
-
-
 # Conclusions
 For the [Politifact](https://www.kaggle.com/datasets/rmisra/politifact-fact-check-dataset/data) dataset, we obtained comparable values of accuracy, recall, precision, and ROC–AUC for both models — logistic regression and LSTM.  
 
-In contrast, for the [WELFake](https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data) dataset, the LSTM model achieved slightly higher accuracy, recall, precision, and ROC–AUC than the logistic regression model. Overall, the WELFake dataset yields better performance metrics, likely due to its larger number of samples and longer text content.  
-
-We therefore expect that for even larger datasets, the LSTM model will continue to outperform logistic regression. This suggests that training LSTM-based models can provide a stronger defense against misinformation, making them particularly valuable for organizations focused on detecting fake news.
-
 # Overview of Repository Layout
 
-The Politifact.ipynb notebook contains the code used to analyze the Politifact dataset and to build both the TF IDF model and the AWD LSTM classifier. The WELFake.ipynb notebook performs a similar analysis for the WELFake dataset. The EDA.ipynb notebook provides exploratory data analysis for both datasets, including statistics such as the most common words per label, typical article lengths, frequent bigrams and trigrams, and for the Politifact dataset, additional features like the most common news sources and quoted speakers. The imgs folder stores the figures of the confusion matrices, and the processed_datasets folder contains the cleaned datasets produced by the PreProcessingDataset module, which is used to preprocess the WELFake data.
-
-
-
+The Politifact.ipynb notebook contains the code used to analyze the Politifact dataset and to build both the TF IDF model and the AWD LSTM classifier. The EDA.ipynb notebook provides exploratory data analysis for the dataset, including statistics such as the most common words per label, typical article lengths, frequent bigrams and trigrams. The imgs folder stores the figures of the confusion matrices.
 
 # Team Members
 This project was developed for 2025 Fall Erdös Institute Deep Learning Boot Camp by:
